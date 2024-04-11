@@ -9,7 +9,6 @@ public class Carte {
     private boolean disponibila;
     private Editura editura;
     private List<Recenzie> recenzii;
-    private List<Cititor> cititori;
     private Sectiune sectiune;
 
     public Carte(String titlu, Autor autor, Editura editura, Sectiune sectiune) {
@@ -38,9 +37,6 @@ public class Carte {
     }
     public void adaugaRecenzie(Recenzie recenzie) {
         recenzii.add(recenzie);
-    }
-    public void adaugaCititor(Cititor cititor) {
-        cititori.add(cititor);
     }
     public void setSectiune(Sectiune sectiune) {
         this.sectiune = sectiune;

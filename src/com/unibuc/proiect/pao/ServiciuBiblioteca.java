@@ -53,12 +53,7 @@ public class ServiciuBiblioteca {
 
     // Interogare 2: Sortarea cărților după autor
     public void sortareCartiDupaAutor() {
-        Collections.sort(carti, new Comparator<Carte>() {
-            @Override
-            public int compare(Carte carte1, Carte carte2) {
-                return carte1.getAutor().getNume().compareTo(carte2.getAutor().getNume());
-            }
-        });
+        carti.sort(Comparator.comparing(carte -> carte.getAutor().getNume()));
     }
 
     // Interogarea 3: Obținerea numărului total de cărți scrise de fiecare autor
@@ -80,7 +75,7 @@ public class ServiciuBiblioteca {
                 autoriSortati.add(autorCarte);
             }
         }
-        Collections.sort(autoriSortati, Comparator.comparing(Autor::getNume));
+        autoriSortati.sort(Comparator.comparing(Autor::getNume));
         return autoriSortati;
     }
 
@@ -130,7 +125,7 @@ public class ServiciuBiblioteca {
     public List<Bibliotecar> bibliotecariPentruSectiune(Sectiune sectiuneCautata) {
         List<Bibliotecar> bibliotecariSectiune = new ArrayList<>();
         for (Bibliotecar bibliotecar : bibliotecari) {
-            if (bibliotecar.getSecțiuneResponsabila().equals(sectiuneCautata)) {
+            if (bibliotecar.getSectiuneResponsabila().equals(sectiuneCautata)) {
                 bibliotecariSectiune.add(bibliotecar);
             }
         }

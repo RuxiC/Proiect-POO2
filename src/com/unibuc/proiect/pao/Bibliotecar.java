@@ -10,7 +10,7 @@ public class Bibliotecar {
         this.nume = nume;
         this.sectiuneResponsabila = new Sectiune(numeSectiune);
     }
-    public Sectiune getSecțiuneResponsabila() {
+    public Sectiune getSectiuneResponsabila() {
         return sectiuneResponsabila;
     }
 

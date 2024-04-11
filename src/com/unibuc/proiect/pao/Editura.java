@@ -13,7 +13,4 @@ public class Editura {
         return nume;
     }
 
-    public String getAdresa() {
-        return adresa;
-    }
 }

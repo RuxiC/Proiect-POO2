@@ -18,20 +18,8 @@ public class Imprumut {
     public Imprumut(Carte carte, Cititor cititor) {
         this.carte = carte;
         this.cititor = cititor;
-        this.titlu = titlu;
         this.dataImprumut = dataImprumut;
         this.dataReturnare = dataReturnare;
-    }
-
-    public Carte getCarte() {
-        return carte;
-    }
-    public String getTitlu() {
-        return titlu;
-    }
-
-    public Cititor getCititor() {
-        return cititor;
     }
 
     public Date getDataImprumut() {

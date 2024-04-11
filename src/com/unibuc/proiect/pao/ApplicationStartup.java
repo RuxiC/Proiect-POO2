@@ -30,15 +30,13 @@ public class ApplicationStartup {
             Imprumut imprumut2 = new Imprumut(carte2, cititor2);
 
             // Creare și adăugare recenzii
-            Recenzie recenzie1 = new Recenzie(carte1, "Continu1",4);
-            Recenzie recenzie2 = new Recenzie(carte2, "Continut2",5);
+            Recenzie recenzie1 = new Recenzie(carte1, "Mi-a placut la nebunie!",4);
+            Recenzie recenzie2 = new Recenzie(carte2, "O carte excelenta. Recomand!",5);
 
             // Adăugare recenzii la cărți
             carte1.adaugaRecenzie(recenzie1);
             carte1.adaugaRecenzie(recenzie2);
             carte2.adaugaRecenzie(recenzie2);
-            //carte1.adaugaCititor(cititor1);
-           // carte2.adaugaCititor(cititor2);
 
             // Creare și adăugare secțiuni
             Sectiune sectiune1 = new Sectiune("fictiune");
@@ -53,10 +51,6 @@ public class ApplicationStartup {
 
             serviciu.adaugaBibliotecar(bibliotecar1);
             serviciu.adaugaBibliotecar(bibliotecar2);
-
-           // serviciu.adaugaCarte(carte1);
-           // serviciu.adaugaCarte(carte2);
-           // serviciu.adaugaCarte(carte3);
 
             serviciu.adaugaImprumut(imprumut1);
             serviciu.adaugaImprumut(imprumut2);
