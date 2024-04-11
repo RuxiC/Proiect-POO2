@@ -6,6 +6,9 @@ public class Bibliotecar {
     public String getNume() {
         return nume;
     }
+    public void setNume(String nume) {
+        this.nume = nume;
+    }
     public Bibliotecar(String nume, String numeSectiune) {
         this.nume = nume;
         this.sectiuneResponsabila = new Sectiune(numeSectiune);

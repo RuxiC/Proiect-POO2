@@ -1,7 +1,7 @@
 package com.unibuc.proiect.pao;
 
 public class Persoana {
-    protected String nume;
+    private String nume;
 
     public Persoana(String nume) {
         this.nume = nume;
@@ -10,4 +10,8 @@ public class Persoana {
     public String getNume() {
         return nume;
     }
+    public void setNume(String nume) {
+        this.nume = nume;
+    }
+
 }
