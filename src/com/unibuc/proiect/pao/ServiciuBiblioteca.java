@@ -20,27 +20,24 @@ public class ServiciuBiblioteca {
         this.imprumuturi= new ArrayList<>();
         this.sectiuni = new ArrayList<>();
     }
-
-    public void adaugaCarte(Carte carte) {
-        carti.add(carte);
-    }
     public void adaugaImprumut(Imprumut imprumut) {
         imprumuturi.add(imprumut);
     }
     public void adaugaSectiune(Sectiune sectiune) {
         sectiuni.add(sectiune);
     }
-
+    public void adaugaCarteInSectiune(Carte carte, Sectiune sectiune) {
+        carte.setSectiune(sectiune);
+        carti.add(carte);
+    }
+    public void adaugaBibliotecar(Bibliotecar bibliotecar) {
+        bibliotecari.add(bibliotecar);
+    }
     public void adaugaCititor(Cititor cititor) {
         cititori.add(cititor);
     }
-
     public List<Carte> getCarti() {
         return carti;
-    }
-
-    public List<Cititor> getCititori() {
-        return cititori;
     }
 
     // Interogarea 1: Găsirea tuturor cărților scrise de un anumit autor
@@ -54,7 +51,17 @@ public class ServiciuBiblioteca {
         return cartiAutor;
     }
 
-    // Interogarea 2: Obținerea numărului total de cărți scrise de fiecare autor
+    // Interogare 2: Sortarea cărților după autor
+    public void sortareCartiDupaAutor() {
+        Collections.sort(carti, new Comparator<Carte>() {
+            @Override
+            public int compare(Carte carte1, Carte carte2) {
+                return carte1.getAutor().getNume().compareTo(carte2.getAutor().getNume());
+            }
+        });
+    }
+
+    // Interogarea 3: Obținerea numărului total de cărți scrise de fiecare autor
     public Map<Autor, Integer> numarCartiPeAutor() {
         Map<Autor, Integer> numarCartiAutor = new HashMap<>();
         for (Carte carte : carti) {
@@ -64,7 +71,7 @@ public class ServiciuBiblioteca {
         return numarCartiAutor;
     }
 
-    // Interogarea 3: Afișarea listei de autori în ordine alfabetică
+    // Interogarea 4: Afișarea listei de autori în ordine alfabetică
     public List<Autor> autoriInOrdineAlfabetica() {
         List<Autor> autoriSortati = new ArrayList<>();
         for (Carte carte : carti) {
@@ -86,36 +93,7 @@ public class ServiciuBiblioteca {
         }
         return false;
     }
-    public List<Bibliotecar> bibliotecariPentruSectiune(Sectiune sectiuneCautata) {
-        List<Bibliotecar> bibliotecariSectiune = new ArrayList<>();
-        for (Bibliotecar bibliotecar : bibliotecari) {
-            if (bibliotecar.getSecțiuneResponsabila().equals(sectiuneCautata)) {
-                bibliotecariSectiune.add(bibliotecar);
-            }
-        }
-        return bibliotecariSectiune;
-    }
-    public void sortareCartiDupaAutor() {
-        Collections.sort(carti, new Comparator<Carte>() {
-            @Override
-            public int compare(Carte carte1, Carte carte2) {
-                return carte1.getAutor().getNume().compareTo(carte2.getAutor().getNume());
-            }
-        });
-    }
-
-    // Afișarea istoricului împrumuturilor unui cititor
-    public List<Imprumut> istoricImprumuturiCititor(Cititor cititor) {
-        List<Imprumut> istoric = new ArrayList<>();
-        for (Imprumut imprumut : imprumuturi) {
-            if (imprumut.getCititor().equals(cititor)) {
-                istoric.add(imprumut);
-            }
-        }
-        return istoric;
-    }
-
-    // Obținerea listei de împrumuturi active
+    // Interogare 6: Obținerea listei de împrumuturi active
     public List<Imprumut> imprumuturiActive() {
         List<Imprumut> active = new ArrayList<>();
         for (Imprumut imprumut : imprumuturi) {
@@ -125,7 +103,7 @@ public class ServiciuBiblioteca {
         }
         return active;
     }
-    // Găsirea tuturor recenziilor pentru o anumită carte
+    // Interogare 7: Găsirea tuturor recenziilor pentru o anumită carte
     public List<Recenzie> recenziiPentruCarte(Carte carte) {
         List<Recenzie> recenzii = new ArrayList<>();
         for (Recenzie recenzie : carte.getRecenzii()) {
@@ -133,8 +111,7 @@ public class ServiciuBiblioteca {
         }
         return recenzii;
     }
-
-    // Afișarea listei de cărți dintr-o anumită secțiune a bibliotecii
+    // Interogare 8: Afișarea listei de cărți dintr-o anumită secțiune a bibliotecii
     public List<Carte> cartiInSectiune(Sectiune sectiune) {
         List<Carte> cartiSectiune = new ArrayList<>();
         for (Carte carte : carti) {
@@ -142,12 +119,22 @@ public class ServiciuBiblioteca {
                 cartiSectiune.add(carte);
             }
         }
-            return cartiSectiune;
+        return cartiSectiune;
     }
-
-    // Afișarea listei de cititori înregistrați în bibliotecă
+    // Interogare 9: Afișarea listei de cititori înregistrați în bibliotecă
     public List<Cititor> cititoriInregistrati() {
         return cititori;
+    }
+
+    // Interogare 10: Afisarea bibliotecarilor responsabili de o anumită secțiune
+    public List<Bibliotecar> bibliotecariPentruSectiune(Sectiune sectiuneCautata) {
+        List<Bibliotecar> bibliotecariSectiune = new ArrayList<>();
+        for (Bibliotecar bibliotecar : bibliotecari) {
+            if (bibliotecar.getSecțiuneResponsabila().equals(sectiuneCautata)) {
+                bibliotecariSectiune.add(bibliotecar);
+            }
+        }
+        return bibliotecariSectiune;
     }
 }
 

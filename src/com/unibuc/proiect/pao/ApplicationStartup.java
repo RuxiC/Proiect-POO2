@@ -35,8 +35,9 @@ public class ApplicationStartup {
 
             // Adăugare recenzii la cărți
             carte1.adaugaRecenzie(recenzie1);
+            carte1.adaugaRecenzie(recenzie2);
             carte2.adaugaRecenzie(recenzie2);
-           // carte1.adaugaCititor(cititor1);
+            //carte1.adaugaCititor(cititor1);
            // carte2.adaugaCititor(cititor2);
 
             // Creare și adăugare secțiuni
@@ -45,9 +46,17 @@ public class ApplicationStartup {
 
             // Adăugare cărți în serviciul bibliotecii
             ServiciuBiblioteca serviciu = new ServiciuBiblioteca();
-            serviciu.adaugaCarte(carte1);
-            serviciu.adaugaCarte(carte2);
-            serviciu.adaugaCarte(carte3);
+
+            serviciu.adaugaCarteInSectiune(carte1, sectiune2);
+            serviciu.adaugaCarteInSectiune(carte2, sectiune2);
+            serviciu.adaugaCarteInSectiune(carte3, sectiune2);
+
+            serviciu.adaugaBibliotecar(bibliotecar1);
+            serviciu.adaugaBibliotecar(bibliotecar2);
+
+           // serviciu.adaugaCarte(carte1);
+           // serviciu.adaugaCarte(carte2);
+           // serviciu.adaugaCarte(carte3);
 
             serviciu.adaugaImprumut(imprumut1);
             serviciu.adaugaImprumut(imprumut2);
@@ -59,14 +68,21 @@ public class ApplicationStartup {
             serviciu.adaugaCititor(cititor2);
 
             // Interogarea 1: Găsirea tuturor cărților scrise de un anumit autor
-            Autor autorCautat = new Autor("Liviu Rebreanu");
+            Autor autorCautat = autor2;
             List<Carte> cartiAutor = serviciu.cartiScriseDeAutor(autorCautat);
             System.out.println("Cărțile scrise de " + autorCautat.getNume() + " sunt:");
             for (Carte carte : cartiAutor) {
                 System.out.println("- " + carte.getTitlu());
             }
 
-            // Interogarea 2: Obținerea numărului total de cărți scrise de fiecare autor
+            // Interogare 2: Sortarea cărților după autor
+            serviciu.sortareCartiDupaAutor();
+            System.out.println("Cărțile sortate după autor:");
+            for (Carte carte : serviciu.getCarti()) {
+                System.out.println("- " + carte.getTitlu() + " de " + carte.getAutor().getNume());
+            }
+
+            // Interogarea 3: Obținerea numărului total de cărți scrise de fiecare autor
             Map<Autor, Integer> numarCartiAutor = serviciu.numarCartiPeAutor();
             System.out.println("Numărul de cărți scrise de fiecare autor:");
             for (Map.Entry<Autor, Integer> entry : numarCartiAutor.entrySet()) {
@@ -75,7 +91,7 @@ public class ApplicationStartup {
                 System.out.println("- " + autor.getNume() + ": " + numarCarti + " cărți");
             }
 
-            // Interogarea 3: Afișarea listei de autori în ordine alfabetică
+            // Interogarea 4: Afișarea listei de autori în ordine alfabetică
             List<Autor> autoriAlfabetic = serviciu.autoriInOrdineAlfabetica();
             System.out.println("Lista de autori în ordine alfabetică:");
             for (Autor autor : autoriAlfabetic) {
@@ -83,14 +99,14 @@ public class ApplicationStartup {
             }
 
 /*
-            // Interogare 4: Afișarea istoricului împrumuturilor unui cititor
+            // Interogare: Afișarea istoricului împrumuturilor unui cititor
             List<Imprumut> istoricCititor = serviciu.istoricImprumuturiCititor(cititor1);
             for (Imprumut imprumut : istoricCititor) {
                 System.out.println("Cartea: " + imprumut.getCarte().getTitlu() + ", Data împrumutului: " + imprumut.getDataImprumut());
             }
 */
             // Interogare 5: Verificarea dacă o anumită editură a publicat o carte specifică
-            Editura edituraCautata = new Editura("Humanitas", "Bucuresti");
+            Editura edituraCautata = editura1;
             for (Carte carte : serviciu.getCarti()) {
                 boolean publicataDeEditura = serviciu.edituraAPublicatCartea(edituraCautata, carte);
                 System.out.println("Cartea " + carte.getTitlu() + " a fost publicată de editura " + edituraCautata.getNume() + "? " + publicataDeEditura);
@@ -105,19 +121,29 @@ public class ApplicationStartup {
             // Interogare 7: Găsirea tuturor recenziilor pentru o anumită carte
             List<Recenzie> recenzii = serviciu.recenziiPentruCarte(carte1);
             for (Recenzie recenzie : recenzii) {
-                System.out.println("Recenzie: " + recenzie.getContinut() + ", Nota: " + recenzie.getNota());
+                System.out.println("Recenzie carte " + carte1.getTitlu() + ":" + recenzie.getContinut() + ", Nota: " + recenzie.getNota());
             }
 
             // Interogare 8: Afișarea listei de cărți dintr-o anumită secțiune a bibliotecii
-            List<Carte> cartiSectiune = serviciu.cartiInSectiune(sectiune1);
+            Sectiune sectiuneCautata = sectiune2;
+            List<Carte> cartiSectiune = serviciu.cartiInSectiune(sectiuneCautata);
+            System.out.println("Cărțile din secțiunea " + sectiuneCautata.getNume() + " sunt:");
             for (Carte carte : cartiSectiune) {
-                System.out.println("Carte: " + carte.getTitlu() + ", Autor: " + carte.getAutor().getNume());
+                System.out.println("- " + carte.getTitlu() + " de " + carte.getAutor().getNume());
             }
 
+            System.out.println("Lista cititorilor înregistrați în bibliotecă");
             //Interogare 9: Afișarea listei de cititori înregistrați în bibliotecă
             List<Cititor> cititoriInregistrati = serviciu.cititoriInregistrati();
             for (Cititor cititor : cititoriInregistrati) {
                 System.out.println("Cititor: " + cititor.getNume());
+            }
+
+            // Interogare 10: Afisarea bibliotecarilor responsabili de o anumită secțiune
+            List<Bibliotecar> bibliotecariSectiune = serviciu.bibliotecariPentruSectiune(sectiune1);
+            System.out.println("Bibliotecarii responsabili pentru secțiunea " + sectiune1.getNume() + " sunt:");
+            for (Bibliotecar bibliotecar : bibliotecariSectiune) {
+                System.out.println("- " + bibliotecar.getNume());
             }
         }
 

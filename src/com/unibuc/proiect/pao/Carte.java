@@ -42,6 +42,9 @@ public class Carte {
     public void adaugaCititor(Cititor cititor) {
         cititori.add(cititor);
     }
+    public void setSectiune(Sectiune sectiune) {
+        this.sectiune = sectiune;
+    }
 }
 
 
