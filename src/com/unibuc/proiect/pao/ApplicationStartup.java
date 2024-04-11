@@ -36,12 +36,12 @@ public class ApplicationStartup {
             // Adăugare recenzii la cărți
             carte1.adaugaRecenzie(recenzie1);
             carte2.adaugaRecenzie(recenzie2);
-            carte1.adaugaCititor(cititor1);
-            carte2.adaugaCititor(cititor2);
+           // carte1.adaugaCititor(cititor1);
+           // carte2.adaugaCititor(cititor2);
 
             // Creare și adăugare secțiuni
-            Sectiune sectiune1 = new Sectiune("Sectiune1");
-            Sectiune sectiune2 = new Sectiune("Sectiune2");
+            Sectiune sectiune1 = new Sectiune("fictiune");
+            Sectiune sectiune2 = new Sectiune("non-fictiune");
 
             // Adăugare cărți în serviciul bibliotecii
             ServiciuBiblioteca serviciu = new ServiciuBiblioteca();
@@ -51,6 +51,12 @@ public class ApplicationStartup {
 
             serviciu.adaugaImprumut(imprumut1);
             serviciu.adaugaImprumut(imprumut2);
+
+            serviciu.adaugaSectiune(sectiune1);
+            serviciu.adaugaSectiune(sectiune2);
+
+            serviciu.adaugaCititor(cititor1);
+            serviciu.adaugaCititor(cititor2);
 
             // Interogarea 1: Găsirea tuturor cărților scrise de un anumit autor
             Autor autorCautat = new Autor("Liviu Rebreanu");
@@ -91,13 +97,11 @@ public class ApplicationStartup {
             }
 
             // Interogare 6: Obținerea listei de împrumuturi active
-            //Cititor cititorCautat = new Cititor("NumeCititor", "PrenumeCititor", "EmailCititor");
-            List<Imprumut> istoricImprumuturi = serviciu.istoricImprumuturiCititor(cititor1);
-            System.out.println("Istoricul împrumuturilor pentru cititorul " + cititor1.getNume() + ":");
-            for (Imprumut imprumut : istoricImprumuturi) {
-                System.out.println("- " + imprumut.getTitlu());
+            List<Imprumut> imprumuturiActive = serviciu.imprumuturiActive();
+            System.out.println("Imprumuturile active sunt:");
+            for (Imprumut imprumut : imprumuturiActive) {
+                System.out.println("- " + imprumut);
             }
-
             // Interogare 7: Găsirea tuturor recenziilor pentru o anumită carte
             List<Recenzie> recenzii = serviciu.recenziiPentruCarte(carte1);
             for (Recenzie recenzie : recenzii) {
@@ -105,7 +109,7 @@ public class ApplicationStartup {
             }
 
             // Interogare 8: Afișarea listei de cărți dintr-o anumită secțiune a bibliotecii
-            List<Carte> cartiSectiune = serviciu.cartiInSectiune(new Sectiune("Sectiune1"));
+            List<Carte> cartiSectiune = serviciu.cartiInSectiune(sectiune1);
             for (Carte carte : cartiSectiune) {
                 System.out.println("Carte: " + carte.getTitlu() + ", Autor: " + carte.getAutor().getNume());
             }

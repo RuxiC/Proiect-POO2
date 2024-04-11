@@ -12,11 +12,13 @@ public class ServiciuBiblioteca {
     private List<Cititor> cititori;
     private List<Bibliotecar> bibliotecari;
     private List<Imprumut> imprumuturi;
+    private List<Sectiune> sectiuni;
     public ServiciuBiblioteca() {
         this.carti = new ArrayList<>();
-       // this.cititori = new ArrayList<>();
+        this.cititori = new ArrayList<>();
         this.bibliotecari = new ArrayList<>();
         this.imprumuturi= new ArrayList<>();
+        this.sectiuni = new ArrayList<>();
     }
 
     public void adaugaCarte(Carte carte) {
@@ -24,6 +26,9 @@ public class ServiciuBiblioteca {
     }
     public void adaugaImprumut(Imprumut imprumut) {
         imprumuturi.add(imprumut);
+    }
+    public void adaugaSectiune(Sectiune sectiune) {
+        sectiuni.add(sectiune);
     }
 
     public void adaugaCititor(Cititor cititor) {

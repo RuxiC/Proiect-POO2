@@ -9,6 +9,11 @@ public class Imprumut {
     private Date dataImprumut;
     private Date dataReturnare;
     private boolean returnat;
+    @Override
+    public String toString() {
+        return "Imprumutul pentru cartea '" + carte.getTitlu() + "' realizat de către cititorul " + cititor.getNume();
+    }
+
 
     public Imprumut(Carte carte, Cititor cititor) {
         this.carte = carte;
